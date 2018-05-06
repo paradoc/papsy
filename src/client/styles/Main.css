@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.title {
+  color: #5F6F8E;
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-size: 78px;
+  font-weight: 800;
+  line-height: normal;
+  text-align: center;
+}
+
+.subtitle {
+  color: #A3A3A3;
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+/* Containers */
+.main-container {
+  align-items: center;
+  background: #F4F7F9;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Quicksand', sans-serif;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 568px;
+}
+
+.text-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.loader {
+  padding-bottom: 1em;
+}
+
+.pastel {
+  color: #849FC4;
+}
+
+.montserrat {
+  font-family: 'Montserrat';
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 128px;
+}
+
+.long-button {
+  cursor: pointer;
+  height: 48px;
+  width: 280px;
+  background: #879EC9;
+  border-radius: 6px;
+}
+
+.button-text {
+  font-family: 'Raleway';
+  font-size: 24px;
+  color: #FFF;
+}

@@ -1,0 +1,11 @@
+html, body, #app {
+  background: #EEE;
+  height: 100%;
+  margin: auto;
+  width: 320px;
+}
+
+#app {
+  display: flex;
+  align-items: center;
+}
