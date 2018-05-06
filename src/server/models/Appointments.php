@@ -19,5 +19,6 @@ class Appointments extends Model
     'treatment_id',
     'schedule_from',
     'secret',
+    'status',
   ];
 }

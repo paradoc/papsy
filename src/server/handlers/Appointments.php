@@ -84,7 +84,14 @@ class AppointmentsHandler
         throw new \Slim\Exception\NotFoundException($req, $res);
       }
 
-      // TODO(): actual implementation here
+      $new_updates = array();
+
+      foreach ($input as $key => $value) {
+        $new_updates[$key] = $value;
+      }
+      // file_put_contents('php://stderr', print_r($new_updates, true));
+
+      $data->update($new_updates);
 
       return $res->withJson($data);
     } catch (NotFound $e) {
@@ -99,7 +106,16 @@ class AppointmentsHandler
    */
   public static function confirm($req, $res, $args)
   {
-    return null;
+    try {
+      $data = Appointments::findOrFail($args['id']);
+
+      $data->status = 'confirmed';
+      $data->save();
+
+      return $res->withJson($data);
+    } catch (NotFound $e) {
+      throw new \Slim\Exception\NotFoundException($req, $res);
+    }
   }
 
   /**
@@ -109,7 +125,16 @@ class AppointmentsHandler
    */
   public static function reject($req, $res, $args)
   {
-    return null;
+    try {
+      $data = Appointments::findOrFail($args['id']);
+
+      $data->status = 'rejected';
+      $data->save();
+
+      return $res->withJson($data);
+    } catch (NotFound $e) {
+      throw new \Slim\Exception\NotFoundException($req, $res);
+    }
   }
 
   /**

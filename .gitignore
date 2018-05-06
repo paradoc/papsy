@@ -1,6 +1,7 @@
 /dist
 /vendor
 /node_modules
+/src/server/sql
 composer.lock
 composer.phar
 yarn-error.log
