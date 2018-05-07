@@ -4,6 +4,8 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Main from './Main';
 import Start from './Start';
 import Register from './Register';
+import Treatment from './Treatment';
+import Schedule from './Schedule';
 
 import '../styles/App.css';
 
@@ -13,6 +15,8 @@ const App = () => (
       <Route exact path="/" component={Main} />
       <Route path="/start" component={Start} />
       <Route path="/register" component={Register} />
+      <Route path="/treatment" component={Treatment} />
+      <Route path="/schedule" component={Schedule} />
     </Switch>
   </HashRouter>
 );

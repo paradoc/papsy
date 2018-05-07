@@ -35,9 +35,9 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
-    "deploy-srv-libs": "cp -R vendor /usr/local/var/www/is226",
-    "copy-dist-local": "cp -R dist /usr/local/var/www/is226",
-    "copy-srv-local": "cp -R src/server/* /usr/local/var/www/is226",
+    "deploy-srv-libs": "cp -R vendor /usr/local/var/www/papsy",
+    "copy-dist-local": "cp -R dist /usr/local/var/www/papsy",
+    "copy-srv-local": "cp -R src/server/* /usr/local/var/www/papsy",
     "deploy-local": "yarn build && yarn copy-dist-local && yarn copy-srv-local "
   }
 }

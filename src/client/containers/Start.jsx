@@ -15,7 +15,7 @@ const Start = () => (
     </div>
     <div className="button-container">
       <Link to="/register"><BlueButton text="yes" /></Link>
-      <Link to="/step/2"><BlueButton text="no" /></Link>
+      <Link to="/treatment"><BlueButton text="no" /></Link>
     </div>
   </div>
 );

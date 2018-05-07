@@ -35,6 +35,23 @@
   height: 568px;
 }
 
+.icons-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 42%;
+}
+
+.content-container {
+  height: 85%;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .back-button-container {
   display: flex;
   align-items: center;
@@ -93,3 +110,23 @@
   font-size: 24px;
   color: #FFF;
 }
+
+.icon-button {
+  cursor: pointer;
+  height: 96px;
+  width: 96px;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: .75em;
+  color: #5F6F8E;
+  font-weight: bold;
+  text-align: center;
+}
+
+.icon-button:hover {
+  color: #879EC9;
+}
+
