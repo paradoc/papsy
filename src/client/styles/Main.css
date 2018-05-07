@@ -35,10 +35,29 @@
   height: 568px;
 }
 
+.back-button-container {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  color: #5F5F5F;
+}
+
 .text-container {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.message-container {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  color: #5F5F5F;
+  font-family: 'Montserrat';
+}
+
+.message-container > span {
+  text-align: center;
 }
 
 .loader {
@@ -61,11 +80,12 @@
 }
 
 .long-button {
+  border: 0;
+  border-radius: 6px;
   cursor: pointer;
   height: 48px;
   width: 280px;
   background: #879EC9;
-  border-radius: 6px;
 }
 
 .button-text {

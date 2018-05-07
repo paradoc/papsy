@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import Main from './Main';
 import Start from './Start';
+import Register from './Register';
 
 import '../styles/App.css';
 
@@ -11,6 +12,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={Main} />
       <Route path="/start" component={Start} />
+      <Route path="/register" component={Register} />
     </Switch>
   </HashRouter>
 );
