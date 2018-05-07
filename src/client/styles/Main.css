@@ -130,3 +130,13 @@
   color: #879EC9;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.calendar {
+ border-radius: 8px;
+ background: #FFF;
+ box-shadow: 0 3px 6px rgba(0,0,0,0.08), 0 3px 6px rgba(0,0,0,0.11);
+}

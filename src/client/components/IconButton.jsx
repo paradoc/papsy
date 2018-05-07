@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
+
 import Extraction from '../assets/Extraction';
 import Filling from '../assets/Filling';
 import RootCanal from '../assets/RootCanal';
@@ -19,16 +21,19 @@ class IconButton extends React.Component {
     let icon;
 
     const wrapper = props => WrappedComponent => (
-      <div
-        className="icon-button"
-        onKeyPress={() => {}}
-        onClick={() => update(this.props.data.id)}
-        role="button"
-        tabIndex={this.props.data.id}
-      >
-        <WrappedComponent {...props} />
-        <span>{this.props.data.name}</span>
-      </div>);
+      <Link to="/schedule">
+        <div
+          className="icon-button"
+          onKeyPress={() => {}}
+          onClick={() => update(this.props.data.id)}
+          role="button"
+          tabIndex={this.props.data.id}
+        >
+          <WrappedComponent {...props} />
+          <span>{this.props.data.name}</span>
+        </div>
+      </Link>
+    );
 
     switch (this.props.data.id) {
       case 1:
