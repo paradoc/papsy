@@ -10,12 +10,7 @@ import context from '../context';
 
 class Notify extends React.Component {
   state = {
-    input: '',
     isInvalid: true,
-  }
-
-  componentDidMount() {
-    console.log(context);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -37,14 +32,15 @@ class Notify extends React.Component {
 
     // TODO: add email regex
     if (input.match(mobile)) {
-      this.setState({ input, isInvalid: false });
+      context.contact = input;
+      this.setState({ isInvalid: false });
     } else {
-      this.setState({ input: '', isInvalid: true });
+      context.contact = '';
+      this.setState({ isInvalid: true });
     }
   }
 
   render() {
-    console.log(this.state.input);
     return (
       <div className="main-container">
         <div className="back-button-container">
@@ -56,8 +52,13 @@ class Notify extends React.Component {
               Please input your mobile number or email address
             </span>
           </div>
-          <div>
-            <input type="text" onChange={this.handleChange} />
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <input
+              className="input-field"
+              type="text"
+              onChange={this.handleChange}
+              placeholder="09171234567"
+            />
           </div>
           <div className="button-container">
             <Link to="/end">

@@ -2,6 +2,7 @@
 
 require_once('models/Appointments.php');
 require_once('models/Patients.php');
+require_once('sms.php');
 
 use Illuminate\Database\Eloquent\ModelNotFoundException as NotFound;
 
@@ -66,6 +67,10 @@ class AppointmentsHandler
       'secret' => $secret,
     ]);
 
+    // Send SMS callback.
+    $sms = AppointmentsHandler::notify($patient->mobile, $secret);
+    file_put_contents('php://stderr', print_r($sms, true));
+
     return $res->withJson($appointment);
   }
 
@@ -89,7 +94,6 @@ class AppointmentsHandler
       foreach ($input as $key => $value) {
         $new_updates[$key] = $value;
       }
-      // file_put_contents('php://stderr', print_r($new_updates, true));
 
       $data->update($new_updates);
 
@@ -146,5 +150,15 @@ class AppointmentsHandler
   {
     $secret = $args['secret'];
     return Appointments::where('secret', '=', $secret)->delete();
+  }
+
+  /**
+   * undocumented function
+   *
+   * @return void
+   */
+  private static function notify($number, $message)
+  {
+    return SemaphoreSMS::send($number, $message);
   }
 }

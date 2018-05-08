@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import Main from './Main';
 import Start from './Start';
@@ -8,8 +8,16 @@ import Treatment from './Treatment';
 import Schedule from './Schedule';
 import Doctor from './Doctor';
 import Notify from './Notify';
+import End from './End';
 
 import '../styles/App.css';
+
+import context from '../context';
+
+const checkTreatment = () => (context.treatment_id !== 0 ? <Schedule /> : <Redirect to="/treatment" />);
+const checkSchedule = () => (context.schedule_from !== '' ? <Doctor /> : <Redirect to="/schedule" />);
+const checkDoctor = () => (context.doctor_id !== 0 ? <Notify /> : <Redirect to="/doctor" />);
+// const checkNotify = () => (context.contact !== '' ? <End /> : <Redirect to="/notify" />);
 
 const App = () => (
   <HashRouter hashType="slash">
@@ -18,9 +26,11 @@ const App = () => (
       <Route path="/start" component={Start} />
       <Route path="/register" component={Register} />
       <Route path="/treatment" component={Treatment} />
-      <Route path="/schedule" component={Schedule} />
-      <Route path="/doctor" component={Doctor} />
-      <Route path="/notify" component={Notify} />
+      <Route path="/schedule" render={checkTreatment} />
+      <Route path="/doctor" component={checkSchedule} />
+      <Route path="/notify" component={checkDoctor} />
+      {/* <Route path="/end" component={checkNotify} /> */}
+      <Route path="/end" component={End} />
     </Switch>
   </HashRouter>
 );

@@ -1,6 +1,7 @@
 <?php
 
 require_once('handlers/Appointments.php');
+require_once('handlers/Patients.php');
 require_once('models/Treatments.php');
 
 $not_implemented = function($request, $response, $args)
@@ -16,6 +17,10 @@ $not_implemented = function($request, $response, $args)
 $app->get('/api/v1/treatments', function($req, $res, $args) {
   $data = Treatments::all();
   return $res->withJson($data);
+});
+
+$app->get('/api/v1/patients', function($req, $res, $args) {
+  return PatientsHandler::get($req, $res, $args);
 });
 
 $app->group('/api/v1/appointments', function() {
