@@ -6,6 +6,8 @@ import Start from './Start';
 import Register from './Register';
 import Treatment from './Treatment';
 import Schedule from './Schedule';
+import Doctor from './Doctor';
+import Notify from './Notify';
 
 import '../styles/App.css';
 
@@ -17,6 +19,8 @@ const App = () => (
       <Route path="/register" component={Register} />
       <Route path="/treatment" component={Treatment} />
       <Route path="/schedule" component={Schedule} />
+      <Route path="/doctor" component={Doctor} />
+      <Route path="/notify" component={Notify} />
     </Switch>
   </HashRouter>
 );

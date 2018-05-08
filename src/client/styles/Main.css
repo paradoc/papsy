@@ -94,6 +94,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   height: 128px;
+  width: 100%;
 }
 
 .long-button {
@@ -101,8 +102,14 @@
   border-radius: 6px;
   cursor: pointer;
   height: 48px;
-  width: 280px;
+  width: 80%;
+  max-width: 238px;
   background: #879EC9;
+}
+
+.long-button:disabled {
+  background: #86888A;
+  text-decoration: line-through;
 }
 
 .button-text {
@@ -133,6 +140,8 @@
 a {
   text-decoration: none;
   color: inherit;
+  display: flex;
+  justify-content: center;
 }
 
 .calendar {
