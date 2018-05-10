@@ -49,6 +49,23 @@ class AppointmentsHandler
    *
    * @return void
    */
+  public static function get_view($req, $res, $args)
+  {
+    $appointments = Appointments::with([
+        'patient:id,last_name,first_name',
+        'treatment:id,name'
+      ])
+      ->where('doctor_id', $req->getQueryParam('d'))
+      ->where('status', 'requested')->get();
+
+    return $res->withJson($appointments);
+  }
+
+  /**
+   * undocumented function
+   *
+   * @return void
+   */
   public static function get_id($req, $res, $args)
   {
     try {

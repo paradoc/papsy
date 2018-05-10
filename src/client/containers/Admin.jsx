@@ -51,7 +51,7 @@ class Admin extends React.Component {
   }
 
   getAppointments = async () => {
-    const appointments = await fetch(`${baseUrl}?d=${this.state.id}&s=requested`);
+    const appointments = await fetch(`${baseUrl}/view/all?d=${this.state.id}`);
     const requests = await appointments.json();
 
     this.setState({ requests });
@@ -61,8 +61,6 @@ class Admin extends React.Component {
     sessionStorage.clear();
     this.setState({ id: null });
   }
-
-  // TODO: get joined table
 
   async confirmAppointment(id) {
     await fetch(`${baseUrl}/${id}/confirm`, { method: 'PATCH' });
@@ -103,9 +101,9 @@ class Admin extends React.Component {
             {this.state.requests.map(request => (
               <div style={itemStyle} className="item">
                 <div style={{ ...flexCol, width: '70%', marginLeft: '0.4em' }}>
-                  <span>{request.name}</span>
-                  <span style={scheduleStyle}>{request.schedule}</span>
-                  <span style={treatmentStyle}>{request.treatment_id}</span>
+                  <span>{`${request.patient.last_name}, ${request.patient.first_name}`}</span>
+                  <span style={scheduleStyle}>{request.schedule_from}</span>
+                  <span style={treatmentStyle}>{request.treatment.name}</span>
                 </div>
                 <div style={{ width: '30%', display: 'flex', justifyContent: 'space-evenly' }}>
                   <div

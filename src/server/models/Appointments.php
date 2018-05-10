@@ -21,4 +21,36 @@ class Appointments extends Model
     'secret',
     'status',
   ];
+
+  protected $primaryKey = 'id';
+
+  /**
+   * undocumented function
+   *
+   * @return void
+   */
+  public function doctor()
+  {
+    return $this->belongsTo('Doctors');
+  }
+
+  /**
+   * undocumented function
+   *
+   * @return void
+   */
+  public function treatment()
+  {
+    return $this->belongsTo('Treatments');
+  }
+
+  /**
+   * undocumented function
+   *
+   * @return void
+   */
+  public function patient()
+  {
+    return $this->belongsTo('Patients');
+  }
 }

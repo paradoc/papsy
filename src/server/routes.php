@@ -55,6 +55,10 @@ $app->group('/api/v1/appointments', function() {
     };
   });
 
+  $this->get('/view/all', function($req, $res, $args) {
+    return AppointmentsHandler::get_view($req, $res, $args);
+  });
+
   $this->patch('/{id}/confirm', function($req, $res, $args) {
     return AppointmentsHandler::confirm($req, $res, $args);
   });
