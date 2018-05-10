@@ -81,6 +81,7 @@ class Admin extends React.Component {
             display: 'flex',
             alignItems: 'center',
             width: '90%',
+            paddingTop: '2.4em',
             justifyContent: 'space-between',
           }}
           >
