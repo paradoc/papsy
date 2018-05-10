@@ -19,6 +19,28 @@ class AppointmentsHandler
    */
   public static function get($req, $res, $args)
   {
+    $date = $req->getQueryParam('on');
+    $status = $req->getQueryParam('s');
+    $doctor = $req->getQueryParam('d');
+
+    $conditions = [];
+
+    if ($date) {
+      array_push($conditions, ['schedule_from', 'like', $date.'%']);
+    }
+
+    if ($status) {
+      array_push($conditions, ['status', '=', $status]);
+    }
+
+    if ($doctor) {
+      array_push($conditions, ['doctor_id', '=', $doctor]);
+    }
+
+    if (count($conditions) > 0) {
+      return $res->withJson(Appointments::where($conditions)->get());
+    }
+
     return $res->withJson(Appointments::all());
   }
 
@@ -42,34 +64,23 @@ class AppointmentsHandler
    *
    * @return void
    */
-  public static function get_by_date($req, $res, $args)
-  {
-    $data = Appointments::whereDate('schedule_from', $args['date'])->get();
-    return $res->withJson($data);
-  }
-
-  /**
-   * undocumented function
-   *
-   * @return void
-   */
   public static function post($req, $res, $args)
   {
     $input = $req->getParsedBody();
     $patient = Patients::find($input['patient_id']);
     $secret = sha1($patient->mobile . time());
+    $schedule_from = $input['schedule_from'];
 
     $appointment = Appointments::create([
       'patient_id' => $input['patient_id'],
       'doctor_id' => $input['doctor_id'],
       'treatment_id' => $input['treatment_id'],
-      'schedule_from' => $input['schedule_from'],
+      'schedule_from' => $schedule_from,
       'secret' => $secret,
     ]);
 
     // Send SMS callback.
-    $sms = AppointmentsHandler::notify($patient->mobile, $secret);
-    file_put_contents('php://stderr', print_r($sms, true));
+    AppointmentsHandler::notify($patient->mobile, $secret);
 
     return $res->withJson($appointment);
   }
@@ -157,8 +168,12 @@ class AppointmentsHandler
    *
    * @return void
    */
-  private static function notify($number, $message)
+  private static function notify($number, $secret)
   {
-    return SemaphoreSMS::send($number, $message);
+    $message = "Hi there! Your appointment request will be processed soon. ";
+    $message .= "If you want to change your appointment details, please visit ";
+    $message .= "http://mjcoprada.ga/papsy/#/view/" . $secret;
+
+    SemaphoreSMS::send($number, $message);
   }
 }

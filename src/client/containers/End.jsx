@@ -1,5 +1,6 @@
 import React from 'react';
 import Loading from 'react-loading-spinkit';
+import QRCode from 'qrcode.react';
 
 import Back from '../assets/Back';
 import context from '../context';
@@ -8,6 +9,7 @@ class End extends React.Component {
   state = {
     loading: true,
     confirmed: false,
+    secret: '',
   }
 
   componentWillMount() {
@@ -30,11 +32,9 @@ class End extends React.Component {
         },
       );
 
-      // TODO: make something out of this (i.e. QR code)
       const { secret } = await schedule.json();
-      console.log(secret);
 
-      this.setState({ loading: false, confirmed: true });
+      this.setState({ loading: false, confirmed: true, secret });
     } else {
       this.setState({ loading: false });
     }
@@ -42,7 +42,7 @@ class End extends React.Component {
 
   getMessage() {
     if (this.state.confirmed) {
-      return 'Done!';
+      return 'You may scan this code as your reference. Thank you!';
     }
 
     return 'I am unable to find you in our records';
@@ -55,7 +55,10 @@ class End extends React.Component {
           <Back />
         </div>
         <div className="content-container">
-          <div className="message-container">
+          <div
+            className="message-container"
+            style={{ flexDirection: 'column', height: '70%', justifyContent: 'space-evenly' }}
+          >
             <span style={{ color: '#5F6F8E' }}>
               {this.state.loading &&
                 <Loading
@@ -66,6 +69,9 @@ class End extends React.Component {
                 />}
               {!this.state.loading && this.getMessage()}
             </span>
+            {this.state.secret !== '' ?
+              <QRCode value={`http://mjcoprada.ga/papsy/#/view/${this.state.secret}`} />
+              : null}
           </div>
         </div>
       </div>

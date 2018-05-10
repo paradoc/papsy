@@ -2,6 +2,7 @@
 
 require_once('handlers/Appointments.php');
 require_once('handlers/Patients.php');
+require_once('models/Doctors.php');
 require_once('models/Treatments.php');
 
 $not_implemented = function($request, $response, $args)
@@ -13,6 +14,14 @@ $not_implemented = function($request, $response, $args)
     ->withHeader('Content-Type', 'application/json')
     ->write(json_encode($message));
 };
+
+$app->post('/api/v1/authenticate', function($req, $res, $args) {
+  $data = $req->getParsedBody();
+  return $res->withJson(
+    Doctors::where('username', $data['username'])
+           ->where('password', md5($data['password']))
+           ->get());
+});
 
 $app->get('/api/v1/treatments', function($req, $res, $args) {
   $data = Treatments::all();
@@ -44,10 +53,6 @@ $app->group('/api/v1/appointments', function() {
       case 'PATCH':
         return AppointmentsHandler::patch_id($req, $res, $args);
     };
-  });
-
-  $this->get('/by-date/{date}', function($req, $res, $args) {
-    return AppointmentsHandler::get_by_date($req, $res, $args);
   });
 
   $this->patch('/{id}/confirm', function($req, $res, $args) {

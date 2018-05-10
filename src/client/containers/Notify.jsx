@@ -22,8 +22,6 @@ class Notify extends React.Component {
   }
 
   handleChange = (e) => {
-    // this.setState({ input: e.target.value });
-    // console.log(e.target.value, this.state.input);
     this.validate(e.target.value);
   }
 

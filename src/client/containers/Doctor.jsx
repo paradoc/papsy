@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Dentist from '../assets/Dentist';
-import RootCanal from '../assets/RootCanal';
 import Back from '../assets/Back';
 import '../styles/Main.css';
 
@@ -14,6 +13,16 @@ const iconContainerStyle = {
 };
 
 const update = (id) => { context.doctor_id = id; };
+
+const Image = () => (
+  <img
+    height="72"
+    width="72"
+    style={{ borderRadius: '50%' }}
+    alt="profile_photo"
+    src="https://yt3.ggpht.com/-IOF4hx2TmRQ/AAAAAAAAAAI/AAAAAAAAAEw/WPeNbh600Xk/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg"
+  />
+);
 
 class Doctor extends React.Component {
   wrapper = props => injected => WrappedComponent => (
@@ -44,8 +53,7 @@ class Doctor extends React.Component {
             </span>
           </div>
           <div className="icons-container" style={iconContainerStyle}>
-            {this.wrapper()({ id: 1, name: 'ark' })(RootCanal)}
-            {this.wrapper()({ id: 1, name: 'ark' })(RootCanal)}
+            {this.wrapper()({ id: 1, name: 'Mark' })(Image)}
           </div>
           <div style={{ opacity: 0.6, marginBottom: -42 }}>
             <Dentist />

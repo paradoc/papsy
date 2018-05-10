@@ -35,13 +35,13 @@ class SemaphoreSMS
     // Set the content type to application/json.
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
       'Content-Type: application/json',
-      'Accept: application/json',
     ]);
 
-    $response = curl_exec($ch);
-    curl_close($ch);
+    // We do not want to get the response.
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-    return $response;
+    curl_exec($ch);
+    curl_close($ch);
   }
 }
 
