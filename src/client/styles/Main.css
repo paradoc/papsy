@@ -177,3 +177,7 @@ a {
 .row + .row {
   padding-top: 1em;
 }
+
+.select {
+  width: 80%;
+}

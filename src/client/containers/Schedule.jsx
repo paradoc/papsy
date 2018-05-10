@@ -135,8 +135,11 @@ class Schedule extends React.Component {
             beforeClose={this.reset}
           >
             <Select
+              className="select"
+              clearable={false}
               options={this.state.options}
               autosize={false}
+              searchable={false}
               onChange={this.setValue}
               value={this.state.selectedTime}
               onOpen={this.updateOptions}
