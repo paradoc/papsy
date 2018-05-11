@@ -213,6 +213,7 @@ class View extends React.Component {
   showDatepicker = () => this.dateModal.show();
 
   updateOptions = () => {
+    document.querySelector('.calendar').style.display = 'none';
     const date = moment(this.state.selectedDay).format('YYYY-MM-DD');
 
     this.fetchSchedules(date).then((schedules) => {
@@ -291,6 +292,7 @@ class View extends React.Component {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                width: '100%',
               }}
               >
                 <DayPicker
@@ -310,6 +312,9 @@ class View extends React.Component {
                   onChange={this.setDateTime}
                   value={this.state.selectedTime}
                   onOpen={this.updateOptions}
+                  onClose={() => {
+                    document.querySelector('.calendar').style.display = 'block';
+                  }}
                 />
               </div>
               <BlueButton
