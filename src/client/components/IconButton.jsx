@@ -21,18 +21,30 @@ class IconButton extends React.Component {
     let icon;
 
     const wrapper = props => WrappedComponent => (
-      <Link to="/schedule">
+      this.props.noRedirect ?
         <div
           className="icon-button"
           onKeyPress={() => {}}
-          onClick={() => update(this.props.data.id)}
+          onClick={this.props.onClick ? this.props.onClick : () => update(this.props.data.id)}
           role="button"
           tabIndex={this.props.data.id}
         >
           <WrappedComponent {...props} />
           <span>{this.props.data.name}</span>
         </div>
-      </Link>
+        :
+        <Link to="/schedule">
+          <div
+            className="icon-button"
+            onKeyPress={() => {}}
+            onClick={this.props.onClick ? this.props.onClick : () => update(this.props.data.id)}
+            role="button"
+            tabIndex={this.props.data.id}
+          >
+            <WrappedComponent {...props} />
+            <span>{this.props.data.name}</span>
+          </div>
+        </Link>
     );
 
     switch (this.props.data.id) {
@@ -67,6 +79,12 @@ IconButton.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
   }).isRequired,
+  noRedirect: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+IconButton.defaultProps = {
+  noRedirect: false,
+  onClick: null,
 };
 
 export default IconButton;

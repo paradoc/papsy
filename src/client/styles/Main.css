@@ -170,14 +170,21 @@ a {
 }
 
 .row {
-  width: 100%;
   display: flex;
 }
 
 .row + .row {
-  padding-top: 1em;
+  padding-top: 0.8em;
 }
 
 .select {
   width: 80%;
+}
+
+.edit {
+  margin-right: 0.3em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
 }

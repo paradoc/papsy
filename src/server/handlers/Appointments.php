@@ -51,9 +51,26 @@ class AppointmentsHandler
    */
   public static function get_view($req, $res, $args)
   {
+    $appointment = Appointments::with([
+        'treatment:id,name',
+        'doctor:id,name',
+      ])
+      ->where('secret', $args['secret'])
+      ->get();
+
+    return $res->withJson($appointment);
+  }
+
+  /**
+   * undocumented function
+   *
+   * @return void
+   */
+  public static function get_admin_view($req, $res, $args)
+  {
     $appointments = Appointments::with([
         'patient:id,last_name,first_name',
-        'treatment:id,name'
+        'treatment:id,name',
       ])
       ->where('doctor_id', $req->getQueryParam('d'))
       ->where('status', 'requested')->get();
@@ -100,6 +117,25 @@ class AppointmentsHandler
     AppointmentsHandler::notify($patient->mobile, $secret);
 
     return $res->withJson($appointment);
+  }
+
+  /**
+   * undocumented function
+   *
+   * @return void
+   */
+  public static function patch($req, $res, $args)
+  {
+    $data = $req->getParsedBody();
+    $response = Appointments::where('id', $args['id'])
+      ->where('secret', $data['secret'])
+      ->update([
+        'schedule_from' => $data['schedule_from'],
+        'doctor_id' => $data['doctor_id'],
+        'treatment_id' => $data['treatment_id'],
+      ]);
+
+    return $res->withJson($response);
   }
 
   /**

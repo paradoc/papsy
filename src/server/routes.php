@@ -51,12 +51,16 @@ $app->group('/api/v1/appointments', function() {
       case 'GET':
         return AppointmentsHandler::get_id($req, $res, $args);
       case 'PATCH':
-        return AppointmentsHandler::patch_id($req, $res, $args);
+        return AppointmentsHandler::patch($req, $res, $args);
     };
   });
 
-  $this->get('/view/all', function($req, $res, $args) {
+  $this->get('/edit/{secret}', function($req, $res, $args) {
     return AppointmentsHandler::get_view($req, $res, $args);
+  });
+
+  $this->get('/view/all', function($req, $res, $args) {
+    return AppointmentsHandler::get_admin_view($req, $res, $args);
   });
 
   $this->patch('/{id}/confirm', function($req, $res, $args) {
