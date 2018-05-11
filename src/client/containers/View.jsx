@@ -82,6 +82,7 @@ class View extends React.Component {
         name: '',
       },
     },
+    redirect: false,
     selectedDay: null,
     selectedTime: '',
     selectDisabled: true,
@@ -106,10 +107,13 @@ class View extends React.Component {
   }
 
   onCancel = async () => {
+    const { secret } = this.props.match.params;
     const confirmed = window.confirm('Click OK to cancel your appointment.');
     if (confirmed) {
-      await fetch(`/papsy/api/v1/appointments/${this.state.data.id}/cancel`)
-        .then(() => <Redirect to="/" />);
+      await fetch(
+        `/papsy/api/v1/appointments/${secret}/cancel`,
+        { method: 'DELETE' },
+      );
     }
   }
 
@@ -132,7 +136,11 @@ class View extends React.Component {
     const url = `/papsy/api/v1/appointments/edit/${secret}`;
     const [data] = await fetch(url).then(d => d.json());
 
-    this.setState({ data });
+    if (data !== undefined) {
+      this.setState({ data });
+    } else {
+      this.setState({ redirect: true });
+    }
   }
 
   getTreatments = async () => {
@@ -249,6 +257,8 @@ class View extends React.Component {
 
   render() {
     return (
+      this.state.redirect ? <Redirect to="/" />
+        :
       <div className="main-container">
         <div style={{
           display: 'flex',
